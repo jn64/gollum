@@ -20,6 +20,7 @@ RUN gem install \
     org-ruby \
     RedCloth \
     bibtex-ruby \
+    pygments.rb \
     && echo "gem-extra complete"
 
 WORKDIR /app
@@ -39,6 +40,7 @@ RUN apk --no-cache add \
             git \
             gcompat \
             openssh \
+            py3-pygments \
     && delgroup www-data \
     && addgroup -g $GID www-data \
     && adduser -S -u $UID -G www-data www-data \

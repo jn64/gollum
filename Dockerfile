@@ -39,9 +39,9 @@ RUN apk --no-cache add \
             git \
             libc6-compat \
             openssh \
-            shadow \
-    && groupmod -g $GID www-data \
-    && adduser -u $UID -S www-data -G www-data \
+    && delgroup www-data \
+    && addgroup -g $GID www-data \
+    && adduser -S -u $UID -G www-data www-data \
     && git config --file /home/www-data/.gitconfig --add safe.directory /wiki \
     && chown www-data:www-data /home/www-data/.gitconfig
 

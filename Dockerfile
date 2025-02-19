@@ -37,7 +37,7 @@ WORKDIR /wiki
 RUN apk --no-cache add \
             bash \
             git \
-            libc6-compat \
+            gcompat \
             openssh \
     && delgroup www-data \
     && addgroup -g $GID www-data \

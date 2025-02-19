@@ -1,14 +1,12 @@
 FROM ruby:3.3-alpine AS builder
 
-RUN apk add --update \
-            --no-cache \
+RUN apk --no-cache add \
             build-base \
             cmake \
             git \
             icu-dev \
             openssl-dev \
-            yaml-dev \
-    && rm -rf /var/cache/apk/*
+            yaml-dev
 
 COPY Gemfile* /tmp/
 COPY gollum.gemspec* /tmp/
@@ -36,14 +34,12 @@ ARG GID=1000
 COPY --from=builder /usr/local/bundle/ /usr/local/bundle/
 
 WORKDIR /wiki
-RUN apk add --update \
-            --no-cache \
+RUN apk --no-cache add \
             bash \
             git \
             libc6-compat \
             openssh \
             shadow \
-    && rm -rf /var/cache/apk/* \
     && groupmod -g $GID www-data \
     && adduser -u $UID -S www-data -G www-data \
     && git config --file /home/www-data/.gitconfig --add safe.directory /wiki \
